@@ -15,7 +15,7 @@ install_prereq:
 
 clean:
 	rm -f ./SOURCES/haproxy-${VERSION}.tar.gz
-	rm -f ./SOURCES/openssl-${SSLVERSION}.tar.gz
+	rm -f /tmp/${SSLVERSION}.tar.gz
 	rm -rf ./rpmbuild
 	mkdir -p ./rpmbuild/SPECS/ ./rpmbuild/SOURCES/ ./rpmbuild/RPMS/ ./rpmbuild/SRPMS/
 
