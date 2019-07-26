@@ -84,7 +84,7 @@ systemd_opts=
 pcre_opts="USE_PCRE=1"
 USE_TFO=
 USE_NS=
-ssl_opts="SSL_INC=/tmp/staticlibssl/include SSL_LIB=/tmp/staticlibssl/lib""
+ssl_opts="SSL_INC=/tmp/staticlibssl/include SSL_LIB=/tmp/staticlibssl/lib"
 
 %if 0%{?el7} || 0%{?amzn2}
 systemd_opts="USE_SYSTEMD=1"
