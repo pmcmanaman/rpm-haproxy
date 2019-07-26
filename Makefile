@@ -5,7 +5,7 @@ VERSION=$(shell wget -qO- http://git.haproxy.org/git/haproxy-${MAINVERSION}.git/
 ifeq ("${VERSION}","./")
         VERSION="${MAINVERSION}.0"
 endif
-SSLVERSION=$(shell wget -qO- https://github.com/openssl/openssl/tags | grep ${SSLMAINVERSION} | sed 's/<[^>]*>//g' | grep ${SSLMAINVERSION} | head -n1 | sed "s/ //g"
+SSLVERSION=$(shell wget -qO- https://github.com/openssl/openssl/tags | grep ${SSLMAINVERSION} | sed 's/<[^>]*>//g' | grep ${SSLMAINVERSION} | head -n1 | sed "s/ //g")
 RELEASE=1
 
 all: build
@@ -23,15 +23,14 @@ download-upstream:
 	wget http://www.haproxy.org/download/${MAINVERSION}/src/haproxy-${VERSION}.tar.gz -O ./SOURCES/haproxy-${VERSION}.tar.gz
 
 download-openssl:
-	wget https://github.com/openssl/openssl/archive/${SSLMAINVERSION}.tar.gz -O /tmp/openssl-${SSLVERSION}.tar.gz
-	tar zxvf /tmp/openssl-${SSLVERSION}.tar.gz
-	mkdir /tmp/staticlibssl
- 	cd /tmp/open*
-	./config --prefix=/tmp/staticlibssl no-shared
-	make
-	make_sw	
+	wget https://github.com/openssl/openssl/archive/${SSLVERSION}.tar.gz -O /tmp/${SSLVERSION}.tar.gz
+	tar zxvf /tmp/${SSLVERSION}.tar.gz -C /tmp
+	mkdir -p /tmp/staticlibssl
+	cd /tmp/openssl-${SSLVERSION} ; ./config --prefix=/tmp/staticlibssl no-shared
+	cd /tmp/openssl-${SSLVERSION} ; make
+	cd /tmp/openssl-${SSLVERSION} ; make install_sw
 
-build: install_prereq clean download-upstream
+build: install_prereq clean download-upstream download-openssl
 	cp -r ./SPECS/* ./rpmbuild/SPECS/ || true
 	cp -r ./SOURCES/* ./rpmbuild/SOURCES/ || true
 	rpmbuild -ba SPECS/haproxy.spec \
