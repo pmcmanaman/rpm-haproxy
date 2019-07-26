@@ -84,6 +84,7 @@ systemd_opts=
 pcre_opts="USE_PCRE=1"
 USE_TFO=
 USE_NS=
+ssl_opts="SSL_INC=/tmp/staticlibssl/include SSL_LIB=/tmp/staticlibssl/lib""
 
 %if 0%{?el7} || 0%{?amzn2}
 systemd_opts="USE_SYSTEMD=1"
@@ -95,7 +96,7 @@ USE_TFO=1
 USE_NS=1
 %endif
 
-%{__make} -j$RPM_BUILD_NCPUS %{?_smp_mflags} CPU="generic" TARGET="linux-glibc" ${systemd_opts} ${pcre_opts} USE_OPENSSL=1 USE_ZLIB=1 ${regparm_opts} ADDINC="%{optflags}" USE_LINUX_TPROXY=1 USE_THREAD=1 USE_TFO=${USE_TFO} USE_NS=${USE_NS} ADDLIB="%{__global_ldflags}"
+%{__make} -j$RPM_BUILD_NCPUS %{?_smp_mflags} CPU="generic" TARGET="linux-glibc" ${systemd_opts} ${pcre_opts} USE_OPENSSL=1 ${ssl_opts} USE_ZLIB=1 ${regparm_opts} ADDINC="%{optflags}" USE_LINUX_TPROXY=1 USE_THREAD=1 USE_TFO=${USE_TFO} USE_NS=${USE_NS} ADDLIB="%{__global_ldflags}"
 
 %install
 [ "%{buildroot}" != "/" ] && %{__rm} -rf %{buildroot}
