@@ -1,6 +1,6 @@
 [![Github All Releases](https://img.shields.io/github/downloads/DBezemer/rpm-haproxy/total.svg)](https://github.com/DBezemer/rpm-haproxy/releases)
 
-*** This fork downloads and builds OpenSSL in a local directory and then links OpenSSL statically against HAProxy per the [INSTALL](https://github.com/haproxy/haproxy/blob/master/INSTALL). This allow HTTP2 on CentOS 6 ***
+*** This fork downloads and builds OpenSSL in a local directory and then links OpenSSL statically against HAProxy per the [INSTALL](https://github.com/haproxy/haproxy/blob/master/INSTALL). This allow HTTP/2 on CentOS 6 ***
 
 This repository contains some build artifacts of HAproxy that are provided with no support and no expectation of stability.
 The recommended way of using the repository is to build and test your own packages.
