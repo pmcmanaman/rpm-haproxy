@@ -29,6 +29,7 @@ download-openssl:
 	cd /tmp/openssl-${SSLVERSION} ; ./config --prefix=/tmp/staticlibssl no-shared
 	cd /tmp/openssl-${SSLVERSION} ; make
 	cd /tmp/openssl-${SSLVERSION} ; make install_sw
+	rm -rf /tmp/${SSLVERSION}.tar.gz /tmp/openssl-${SSLVERSION}
 
 build: install_prereq clean download-upstream download-openssl
 	cp -r ./SPECS/* ./rpmbuild/SPECS/ || true
